@@ -20,11 +20,11 @@ class Game:
                 raw = input("> ")
                 line = "".join(raw.split())
                 if line[0] == "f":
-                    point = tuple(map(int, line[1:].split(",")))
-                    self.board.flag_square(point[0], point[1])
+                    row, col = map(int, line[1:].split(","))
+                    self.board.flag_square(row, col)
                 else:
-                    point = tuple(map(int, line.split(",")))
-                    self.board.click_square(point[0], point[1])
+                    row, col = map(int, line.split(","))
+                    self.board.click_square(row, col)
             except (IndexError, ValueError):
                 self.help()
             except KeyboardInterrupt:
