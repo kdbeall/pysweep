@@ -22,9 +22,12 @@ class TestSquare(unittest.TestCase):
 
     def test_square_neighbors(self):
         """ Tests getting a squares neighbors. """
-        board = Board(2, 2)
+        board = Board(3, 3)
         square = Square(board, 0 ,0, False)
+        print(square.neighbors())
         self.assertEqual(3, len(square.neighbors()))
+        square_center = Square(board, 1,1, False)
+        self.assertEqual(8, len(square_center.neighbors()))
 
 class TestBoard(unittest.TestCase):
 

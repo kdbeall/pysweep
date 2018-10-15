@@ -133,14 +133,14 @@ class Square:
         self.clicked = False
 
     def mine_neighbors(self):
-        return len(list(filter(lambda square: square.mine, [self.board.squares[point[0]][point[1]] for point in self.__point_neighbors()])))
+        return len([neighbor for neighbor in self.neighbors() if neighbor.mine])
 
     def neighbors(self):
         return [self.board.squares[point[0]][point[1]] for point in self.__point_neighbors()]
 
     def __point_neighbors(self):
-        row_neighbors = list(filter(lambda val: val >= 0 and val < self.board.rows, [self.row-1, self.row, self.row+1])) 
-        col_neighbors = list(filter(lambda val: val >= 0 and val < self.board.cols, [self.col-1, self.col, self.col+1]))
-        neighbor_set = set(itertools.product(row_neighbors, col_neighbors))
-        neighbor_set.remove((self.row, self.col))
-        return list(neighbor_set)
+        row_indices = [idx for idx in range(self.row-1, self.row+2) if idx >=0 and idx < self.board.rows]
+        col_indices = [idx for idx in range(self.col-1, self.col+2) if idx >=0 and idx < self.board.cols]
+        neighbor_points = list(itertools.product(row_indices, col_indices))
+        neighbor_points.remove((self.row, self.col))
+        return neighbor_points
